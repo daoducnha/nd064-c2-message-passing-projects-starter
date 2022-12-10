@@ -150,3 +150,11 @@ Your architecture diagram should focus on the services and how they talk to one 
 ## Tips
 * We can access a running Docker container using `kubectl exec -it <pod_id> sh`. From there, we can `curl` an endpoint to debug network issues.
 * The starter project uses Python Flask. Flask doesn't work well with `asyncio` out-of-the-box. Consider using `multiprocessing` to create threads for asynchronous behavior in a standard Flask application.
+
+
+kubectl apply -f deployment/db-configmap.yaml - Set up environment variables for the pods
+kubectl apply -f deployment/db-secret.yaml - Set up secrets for the pods
+kubectl apply -f deployment/postgres.yaml - Set up a Postgres database running PostGIS
+kubectl apply -f deployment/udaconnect-api.yaml - Set up the service and deployment for the API
+kubectl apply -f deployment/udaconnect-app.yaml
+sh scripts/run_db_command.sh <POD_NAME> - Seed your database against the postgres pod. (kubectl get pods will give you the POD_NAME)
