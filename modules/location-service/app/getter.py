@@ -1,11 +1,11 @@
 import grpc
-import order_pb2
-import order_pb2_grpc
+import locations_pb2
+import locations_pb2_grpc
 
-print("Getting location list...")
+print("Getting location by id...")
 
 channel = grpc.insecure_channel("localhost:5005")
-stub = order_pb2_grpc.OrderServiceStub(channel)
+stub = locations_pb2_grpc.LocationServiceStub(channel)
 
-response = stub.Get(order_pb2.Empty())
+response = stub.GetById(locations_pb2.LocationById(location_id="1"))
 print(response)
