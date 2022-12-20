@@ -20,6 +20,6 @@ message LocationResponse {
 }
 
 service LocationService {
-    rpc GetLocationById(LocationById) return (LocationResponse) {}
-    rpc LocationCreate(LocationMessage) return (LocationMessage) {}
+    rpc GetById(LocationById) returns (LocationResponse) {}
+    rpc Create(LocationMessage) returns (LocationMessage) {}
 }
