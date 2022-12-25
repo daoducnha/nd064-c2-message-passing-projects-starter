@@ -8,32 +8,38 @@ services:
     environment:
       POSTGRES_PASSWORD: 123456
 
-  # zookeeper:
-  #   image: 'bitnami/zookeeper:latest'
-  #   ports:
-  #     - '2181:2181'
-  #   environment:
-  #     - ALLOW_ANONYMOUS_LOGIN=yes
-  # kafka:
-  #   image: 'bitnami/kafka:latest'
-  #   environment:
-  #     - KAFKA_BROKER_ID=1
-  #     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
-  #     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-  #     - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-  #     - ALLOW_PLAINTEXT_LISTENER=yes
-  #   ports: 
-  #     - "9092:9092"
-  #   depends_on:
-  #     - zookeeper
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    ports: 
+      - "9092:9092"
+    depends_on:
+      - zookeeper
 
-  # location-event:
-  #   build: ./modules/location-event
-  #   environment:
-  #     - TOPIC_NAME=locations
-  #     - KAFKA_SERVER=kafka:9092
-  #   ports:
-  #     - "5005:5000"
+  location-event:
+    build: ./modules/location-event
+    environment:
+      - TOPIC_NAME=locations
+      - KAFKA_SERVER=kafka:9092
+      - DB_USERNAME=postgre
+      - DB_PASSWORD=123456
+      - DB_HOST=postgre
+      - DB_PORT=5432
+      - DB_NAME=geoconnections
+    depends_on:
+      - kafka
+      - postgre 
   
   # location-service:
   #   build: ./modules/location-service

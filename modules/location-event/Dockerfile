@@ -10,6 +10,4 @@ EXPOSE 5000
 
 COPY . .
 
-RUN cd app
-
-CMD ["python", "location_consumer.py"]
+CMD ["python", "/app/location_consumer.py"]
