@@ -14,6 +14,7 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+
   kafka:
     image: 'bitnami/kafka:latest'
     environment:
@@ -40,12 +41,21 @@ services:
     depends_on:
       - kafka
       - postgre 
-  
-  # location-service:
-  #   build: ./modules/location-service
-  #   ports:
-  #     - "5005:5005"
 
+  location-service:
+    build: ./modules/location-service
+    environment:
+      - TOPIC_NAME=locations
+      - KAFKA_SERVER=kafka:9092
+      - DB_USERNAME=postgre
+      - DB_PASSWORD=123456
+      - DB_HOST=postgre
+      - DB_PORT=5432
+      - DB_NAME=geoconnections
+    ports:
+      - "5005:5005"
+    depends_on:
+      - postgre
   person-service:
     build: ./modules/person-service
     environment:
@@ -70,6 +80,5 @@ services:
   
   frontend:
     build: ./modules/frontend
-    # --platform=linux/x86_64
     ports:
       - "3000:3000"
