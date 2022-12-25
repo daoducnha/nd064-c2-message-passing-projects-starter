@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "1ba17d58-6e58-4ef7-870e-d85587419521",
+		"name": "postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get person",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get person by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://a223a8feb350b48b9aea26f43f92567d-458182601.us-east-1.elb.amazonaws.com:8080/persons/1",
+					"protocol": "http",
+					"host": [
+						"a223a8feb350b48b9aea26f43f92567d-458182601",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"port": "8080",
+					"path": [
+						"persons",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get person connections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://a223a8feb350b48b9aea26f43f92567d-458182601.us-east-1.elb.amazonaws.com:8080/persons/1",
+					"protocol": "http",
+					"host": [
+						"a223a8feb350b48b9aea26f43f92567d-458182601",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"port": "8080",
+					"path": [
+						"persons",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
