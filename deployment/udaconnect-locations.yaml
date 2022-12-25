@@ -6,10 +6,10 @@ metadata:
   name: udaconnect-location
 spec:
   ports:
-  - name: "5000"
-    port: 5000
+  - name: "5003"
+    port: 5003
     targetPort: 5000
-    nodePort: 30002
+    nodePort: 30003
   selector:
     service: udaconnect-location
   type: NodePort
@@ -31,7 +31,7 @@ spec:
         service: udaconnect-location
     spec:
       containers:
-      - image: daoducnha29493/location-service
+      - image: daoducnha29493/location-service:latest
         name: udaconnect-api
         imagePullPolicy: Always
         env:
