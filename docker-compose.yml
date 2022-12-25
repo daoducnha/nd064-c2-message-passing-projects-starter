@@ -34,43 +34,11 @@ services:
   #     - KAFKA_SERVER=kafka:9092
   #   ports:
   #     - "5005:5000"
-
-  # person-service:
-  #   build: ./modules/person-service    
-  #   ports:
-  #     - "5003:5000"
-  
-  # connection-service:
-  #   build: ./modules/connection-service
-  #   ports:
-  #     - "5004:5000"
   
   # location-service:
   #   build: ./modules/location-service
   #   ports:
   #     - "5005:5005"
-  
-  
-  
-  # connection-service:
-  #   build: ./connection-service
-  #   ports:
-  #     - "8080:8080"
-  # person-service:
-  #   build: ./person-service
-  #   ports: 
-  #     - "8080:8080"
-
-  api:
-    build: ./modules/api
-    environment:
-      - DB_USERNAME=postgre
-      - DB_PASSWORD=123456
-      - DB_HOST=postgre
-      - DB_PORT=5432
-      - DB_NAME=geoconnections
-    ports:
-      - "5001:5000"
 
   person-service:
     build: ./modules/person-service
@@ -82,6 +50,17 @@ services:
       - DB_NAME=geoconnections
     ports:
       - "5002:5000"
+
+  connection-service:
+    build: ./modules/connection-service
+    environment:
+      - DB_USERNAME=postgre
+      - DB_PASSWORD=123456
+      - DB_HOST=postgre
+      - DB_PORT=5432
+      - DB_NAME=geoconnections
+    ports:
+      - "5003:5000"
   
   frontend:
     build: ./modules/frontend
