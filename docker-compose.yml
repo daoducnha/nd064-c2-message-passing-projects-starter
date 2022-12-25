@@ -45,8 +45,6 @@ services:
   location-service:
     build: ./modules/location-service
     environment:
-      - TOPIC_NAME=locations
-      - KAFKA_SERVER=kafka:9092
       - DB_USERNAME=postgre
       - DB_PASSWORD=123456
       - DB_HOST=postgre

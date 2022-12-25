@@ -1,0 +1,4 @@
+gRPC endpoints:
+    - GetById: Get location by location_id and return LocationResponse(id, person_id, longitude, latitude, creation_time)
+    - Create: Create new location with input LocationMessage(person_id, longitude, latitude, creation_time)
+    

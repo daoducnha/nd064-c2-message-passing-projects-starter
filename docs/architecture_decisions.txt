@@ -1,0 +1,5 @@
+Frontend: will be display person data and location data
+Location-event: Will be consume kafka event to create location data
+Location-service: Will be implement by gRPC 2 endpoints: get location by ID and create new location
+Connection-service: Will show relationship between person and location
+Database: Will be use Postge for all services
