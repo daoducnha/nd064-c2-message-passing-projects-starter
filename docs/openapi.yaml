@@ -1,0 +1,130 @@
+openapi: 3.0.1
+info:
+  title: UdaConnect App
+  description: UdaConnect App
+  version: '0.1'
+servers:
+  - url: http://localhost:30004
+  - url: http://localhost:30002
+paths:
+  /api/persons:
+    get:
+      description: get all persons
+      responses:
+        '200':
+          description: all persons
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                '0':
+                  value: >
+                    [{"id": 5, "last_name": "Fargo", "company_name": "Alpha
+                    Omega Upholstery", "first_name": "Taco"}, {"id": 6,
+                    "last_name": "Shader", "company_name": "USDA", "first_name":
+                    "Frank"}, {"id": 1, "last_name": "Trexler", "company_name":
+                    "Hampton, Hampton and McQuill", "first_name": "Pam"}, {"id":
+                    8, "last_name": "Badman", "company_name": "Paul Badman &
+                    Associates", "first_name": "Paul"}, {"id": 9, "last_name":
+                    "Spring", "company_name": "The Chicken Sisters Restaurant",
+                    "first_name": "Otto"}]
+      servers:
+        - url: http://localhost:30004
+    post:
+      description: create new person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                company_name:
+                  type: string
+            examples:
+              '0':
+                value: "{\r\n    \"first_name\":\"dao\",\r\n    \"last_name\":\"duc nha\",\r\n    \"company_name\":\"fpt software\"\r\n}"
+      responses:
+        '200':
+          description: data of new person
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  company_name:
+                    type: string
+              examples:
+                '0':
+                  value: >
+                    {"id": 1, "first_name": "dao", "last_name": "duc nha", "company_name": "fpt software"}
+      servers:
+        - url: http://localhost:30004
+    servers:
+      - url: http://localhost:30004
+  /api/persons/1:
+    get:
+      description: get person by id
+      responses:
+        '200':
+          description: get person by id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  company_name:
+                    type: string
+              examples:
+                '0':
+                  value: >
+                    {"id": 1, "first_name": "dao", "last_name": "duc nha", "company_name": "fpt software"}
+      servers:
+        - url: http://localhost:30004
+    servers:
+      - url: http://localhost:30004
+  
+  /api/persons/1/connection:
+    get:
+      description: get relattionship between person and connection
+      parameters:
+        - name: start_date
+          in: query
+          schema:
+            type: string
+          example: '2020-12-01'
+        - name: end_date
+          in: query
+          schema:
+            type: string
+          example: '2020-12-30'
+        - name: distance
+          in: query
+          schema:
+            type: string
+          example: '123'
+        
+      responses:
+        '200':
+          description: relattionship between person and connection
+      servers:
+        - url: http://localhost:30002
+    servers:
+      - url: http://localhost:30002

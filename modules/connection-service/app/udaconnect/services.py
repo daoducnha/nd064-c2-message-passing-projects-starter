@@ -7,9 +7,12 @@ from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchema
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
-
+import requests
+import os
+import json 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
+PERSON_SERVICE_ENDPOINT = os.environ["PERSON_SERVICE_ENDPOINT"]
 
 
 class ConnectionService:
@@ -119,16 +122,17 @@ class PersonService:
         new_person.last_name = person["last_name"]
         new_person.company_name = person["company_name"]
 
-        db.session.add(new_person)
-        db.session.commit()
-
+        requests.post(PERSON_SERVICE_ENDPOINT, json.dumps(new_person))
         return new_person
 
     @staticmethod
     def retrieve(person_id: int) -> Person:
         person = db.session.query(Person).get(person_id)
+        requests.get(PERSON_SERVICE_ENDPOINT + "/" + person_id, timeout=2.50)
         return person
 
     @staticmethod
     def retrieve_all() -> List[Person]:
+
+        requests.get(PERSON_SERVICE_ENDPOINT, timeout=2.50)
         return db.session.query(Person).all()
