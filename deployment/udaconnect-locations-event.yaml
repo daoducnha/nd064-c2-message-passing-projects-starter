@@ -28,10 +28,10 @@ spec:
   template:
     metadata:
       labels:
-        service: udaconnect-location
+        service: udaconnect-location-event
     spec:
       containers:
-      - image: daoducnha29493/location-location-event:latest
+      - image: daoducnha29493/location-event:latest
         name: udaconnect-api
         imagePullPolicy: Always
         env:
