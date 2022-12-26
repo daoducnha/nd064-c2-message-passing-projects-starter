@@ -1,8 +1,19 @@
 Frontend: will be display person data and location data. It will communicate with backend by REST full api (location, persion, connection services)
-Location-event: Consume kafka message from location service then create new data for location with grpc protocal 
-Location-service: Will be implement by gRPC 2 endpoints:
-     get location by ID: get location data by id 
-     create new location: send new message to kafka to create new Location data
-Connection-service: Will show relationship between person and location, Frontend can communicate with this servcie by REST full api
-Person-service: Will show list user and search user by id. Frontend can communicate with this service by REST full api
-Database: Will be use Postge database for store data of all services
+Location-event:
+    Consume kafka message from location service then create new data for location with grpc protocal
+Location-service: 
+    Will be implement by gRPC 2 endpoints:
+        get location by ID: get location data by id 
+        create new location: send new message to kafka to create new Location data
+    With location endpoints I choice gRPC and kafka to implement because there are no need communicate directerly with frontend and it maybe call by by tcp protocal, 
+    and when use kafka support event driven it make application low coupling and with gRPC protocal it make application run more performance 
+
+
+Connection-service: 
+    Will show relationship between person and location, Frontend can communicate with this servcie by REST full api
+    I use rest api to communicate because Connection endpoint communicate with frontend by HTTP protocal easy to implement than gRPC and kafka
+Person-service: 
+    Will show list user and search user by id. Frontend can communicate with this service by REST full api
+    I use rest api to communicate because person endpoints communicate with frontend by HTTP protocal easy to implement than gRPC and kafka
+Database: 
+    Will be use Postge database for store data of all services
